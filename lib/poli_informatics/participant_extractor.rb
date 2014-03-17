@@ -6,7 +6,7 @@ module PoliInformatics
       return empty unless line =~ /[a-zA-Z]/
       return speaker(line) if line == line.upcase
       parts = "#{line} ".split('.')
-      return continuation(line) unless line.start_with?(*TITLES)
+      return continuation(line) unless line.start_with?(*TITLES) && line.include?('.')
       return continuation(line) if parts.size > 15
       return continuation(line) if line =~ /^[.*]$/
       if line.start_with?(*ABBREVIATED)

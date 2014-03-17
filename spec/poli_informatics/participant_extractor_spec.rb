@@ -32,6 +32,8 @@ describe PoliInformatics::ParticipantExtractor do
   it 'should not detect participants in witness lists' do
     expect(detect_participant("        Chairman Reed............................................    88")).
         to be_empty
+    expect(detect_participant("    Senator Akaka")).
+        to be_empty
   end
 
   it 'should split a participant from the text' do
