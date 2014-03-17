@@ -3,7 +3,7 @@ module PoliInformatics
   module CongressionalHearing
     def utterances(source)
       transcript = Transcript.new
-      source.gsub!(/\[.*?\]/,'')
+      source.gsub!(/\[.*?\]/m,'')
       source.lines.each do |line|
         break if line.strip == 'A P P E N D I X'
         transcript.ingest line
