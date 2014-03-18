@@ -3,6 +3,7 @@ module PoliInformatics
   module CongressionalHearing
     def utterances(source)
       transcript = Transcript.new
+      source.gsub!(/\[GRAPHIC\]\s*\[TIFF OMITTED\].*/,'')
       source.gsub!(/\[.*?\]/m,'')
       source.gsub!(/<.*?>/m,'')
       source.lines.each do |line|
