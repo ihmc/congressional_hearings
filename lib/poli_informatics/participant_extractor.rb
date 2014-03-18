@@ -10,13 +10,13 @@ module PoliInformatics
       return continuation(line) if parts.size > 15
       return continuation(line) if line =~ /^[.*]$/
       if line.start_with?(*ABBREVIATED)
-        if [1].include?(parts[1].split.size)
+        if [1].include?(parts[1].split.size) && label?(parts[1][-1,1])
           abbreviated_splits(parts)
         else
           continuation(line)
         end
       else
-        if [2].include?(parts[0].split.size)
+        if [2].include?(parts[0].split.size) && label?(parts[0][-1,1])
           {participant: parts[0], value: parts[1..-1].join(".").strip}
         else
           continuation(line)
@@ -29,6 +29,10 @@ module PoliInformatics
     end
 
     private
+
+    def label?(text)
+      !(text =~ /[^[:alpha:]]/)
+    end
 
     def empty
       {participant: '', value: ''}
