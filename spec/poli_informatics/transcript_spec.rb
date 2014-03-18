@@ -88,5 +88,16 @@ describe PoliInformatics::Transcript do
       expect(transcript.current_text).to eq('')
 
     end
+    it 'should handle multiline statements that end in are preceded by a speaker label' do
+      transcript.ingest('the Fixed Income Group, Vanguard.')
+      transcript.ingest('    Mr. Auwaerter.')
+      transcript.ingest('')
+      transcript.ingest('  STATEMENT OF ROBERT F. AUWAERTER, PRINCIPAL AND HEAD OF THE ')
+      transcript.ingest('             FIXED INCOME GROUP, THE VANGUARD GROUP')
+      expect(transcript.current_participant).
+          to eq('STATEMENT OF ROBERT F. AUWAERTER, PRINCIPAL AND HEAD OF THE FIXED INCOME GROUP, THE VANGUARD GROUP')
+      expect(transcript.current_text).to eq('')
+
+    end
   end
 end

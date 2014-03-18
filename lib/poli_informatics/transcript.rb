@@ -39,7 +39,11 @@ module PoliInformatics
       if participant.upcase == participant
         return if @current_participant.empty?
         if @current_text.empty?
-          @current_participant << " #{participant}"
+          if @current_participant.upcase == @current_participant
+            @current_participant << " #{participant}"
+          else
+            @current_participant = participant
+          end
         else
           @records << {participant: @current_participant, text: @current_text}
           @current_participant = participant
