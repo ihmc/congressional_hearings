@@ -76,5 +76,17 @@ describe PoliInformatics::Transcript do
       expect(transcript.current_participant).to eq('Chairman Reed')
       expect(transcript.current_text).to eq('Please.')
     end
+
+    it 'should handle multiline statements that end in .' do
+      transcript.ingest('')
+      transcript.ingest('STATEMENT OF MARTIN S. FELDSTEIN, GEORGE F. BAKER PROFESSOR OF ')
+      transcript.ingest('ECONOMICS, HARVARD UNIVERSITY, AND PRESIDENT EMERITUS, NATIONAL ')
+      transcript.ingest('               BUREAU OF ECONOMIC RESEARCH, INC.')
+      transcript.ingest('')
+      expect(transcript.current_participant).
+          to eq('STATEMENT OF MARTIN S. FELDSTEIN, GEORGE F. BAKER PROFESSOR OF ECONOMICS, HARVARD UNIVERSITY, AND PRESIDENT EMERITUS, NATIONAL BUREAU OF ECONOMIC RESEARCH, INC.')
+      expect(transcript.current_text).to eq('')
+
+    end
   end
 end

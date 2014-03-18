@@ -29,8 +29,13 @@ describe PoliInformatics::ParticipantExtractor do
         to eq("Mr. Gensler")
   end
 
-  it "shouldn't extract participants if the name ends in puncuation" do
+  it "shouldn't extract participants if the name ends in punctuation" do
     expect(detect_participant("    Mr. Blinder?")).
+        to eq("")
+  end
+
+  it "shouldn't extract participants if it's all caps and ends in a '.'" do
+    expect(detect_participant("HOPE NOW.")).
         to eq("")
   end
 

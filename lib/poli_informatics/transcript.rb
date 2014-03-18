@@ -20,13 +20,18 @@ module PoliInformatics
         handle_participant(p, v)
       else
         if !@current_participant.empty?
-          @current_text << " #{v}"
+          return if v.empty?
+          if v == v.upcase && @current_participant == @current_participant.upcase
+            @current_participant << " #{v}"
+          else
+            @current_text << " #{v}"
+          end
         end
       end
     end
 
     def records
-      [participant: "Speaker",text: "Speech"] +
+      [participant: "Speaker", text: "Speech"] +
           @records << {participant: @current_participant, text: @current_text}
     end
 
