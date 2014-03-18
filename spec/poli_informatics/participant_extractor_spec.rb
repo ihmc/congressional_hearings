@@ -50,4 +50,10 @@ describe PoliInformatics::ParticipantExtractor do
     expect(split("    Mr. Gensler. Chairman Reed, Ranking Member Bunning, other")).
         to eq({participant: 'Mr. Gensler', value: 'Chairman Reed, Ranking Member Bunning, other'})
   end
+
+  it 'should not extract questions' do
+    expect(detect_participant("OCC?")).
+        to be_empty
+
+  end
 end

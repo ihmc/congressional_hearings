@@ -4,7 +4,7 @@ module PoliInformatics
     def split(line)
       line.strip!
       return empty unless line =~ /[a-zA-Z]/
-      return speaker(line) if line == line.upcase && !line.end_with?('.')
+      return speaker(line) if line == line.upcase && !line.end_with?('.','?')
       parts = "#{line} ".split('.')
       return continuation(line) unless line.start_with?(*TITLES) && line.include?('.')
       return continuation(line) if parts.size > 15

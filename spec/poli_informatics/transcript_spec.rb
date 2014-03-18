@@ -97,6 +97,14 @@ describe PoliInformatics::Transcript do
       expect(transcript.current_participant).
           to eq('STATEMENT OF ROBERT F. AUWAERTER, PRINCIPAL AND HEAD OF THE FIXED INCOME GROUP, THE VANGUARD GROUP')
       expect(transcript.current_text).to eq('')
+    end
+
+    it 'should handle questions that end in all caps' do
+      transcript.ingest('    Mr. Watt. So that--would that take the portfolio of the ')
+      transcript.ingest('OCC?')
+      expect(transcript.current_participant).
+          to eq('Mr. Watt')
+      expect(transcript.current_text).to eq('So that--would that take the portfolio of the OCC?')
 
     end
   end
