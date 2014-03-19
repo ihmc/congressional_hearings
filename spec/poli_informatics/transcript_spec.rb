@@ -105,7 +105,16 @@ describe PoliInformatics::Transcript do
       expect(transcript.current_participant).
           to eq('Mr. Watt')
       expect(transcript.current_text).to eq('So that--would that take the portfolio of the OCC?')
+    end
 
+    it 'statements that DO end in "."' do
+      transcript.ingest('')
+      transcript.ingest(' RESPONSE TO WRITTEN QUESTIONS OF SENATOR MERKLEY FROM BEN S. ')
+      transcript.ingest('                            BERNANKE')
+      transcript.ingest('')
+      expect(transcript.current_participant).
+          to eq('RESPONSE TO WRITTEN QUESTIONS OF SENATOR MERKLEY FROM BEN S. BERNANKE')
+      expect(transcript.current_text).to eq('')
     end
   end
 end

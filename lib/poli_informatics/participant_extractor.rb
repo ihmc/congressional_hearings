@@ -4,7 +4,7 @@ module PoliInformatics
     def split(line)
       line.strip!
       return empty unless line =~ /[a-zA-Z]/
-      return speaker(line) if line == line.upcase && !line.end_with?('.','?')
+      return speaker(line) if possible_label?(line)
       parts = "#{line} ".split('.')
       return continuation(line) unless line.start_with?(*TITLES) && line.include?('.')
       return continuation(line) if parts.size > 15
@@ -29,6 +29,10 @@ module PoliInformatics
     end
 
     private
+
+    def possible_label?(line)
+      line == line.upcase && (!line.end_with?('.','?') || line.split.size > 2)
+    end
 
     def label?(text)
       !(text =~ /[^[:alpha:]]/)

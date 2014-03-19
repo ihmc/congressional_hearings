@@ -56,4 +56,9 @@ describe PoliInformatics::ParticipantExtractor do
         to be_empty
 
   end
+  it "should extract statements that end in '.'" do
+    expect(detect_participant("RESPONSE TO WRITTEN QUESTIONS OF SENATOR MERKLEY FROM BEN S.")).
+        to eq("RESPONSE TO WRITTEN QUESTIONS OF SENATOR MERKLEY FROM BEN S.")
+
+  end
 end
