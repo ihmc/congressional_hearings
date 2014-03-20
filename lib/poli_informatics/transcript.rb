@@ -31,8 +31,7 @@ module PoliInformatics
     end
 
     def records
-      [participant: "Speaker", text: "Speech"] +
-          @records << {participant: @current_participant, text: @current_text}
+      @records << {participant: @current_participant, text: @current_text}
     end
 
     def handle_participant(participant, text)

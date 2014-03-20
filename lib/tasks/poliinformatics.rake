@@ -12,8 +12,19 @@ namespace :poliinformatics do
     [dodd_frank_files('htm'), monetary_policy_files('htm'), other_files('htm'), tarp_files('htm')].flatten.each do |hearing|
       u = utterances(File.read(hearing))
       File.open("#{hearing}.csv", 'w') { |f|
+        f.write("Speaker,Speech,Type,Comments\n")
+        type = 'Speech'
+        comments = ''
         u.each { |x|
-          f.write("\"#{x[:participant]}\",\"#{x[:text]}\"\n")
+          if x[:participant] == x[:participant].upcase
+            type = 'Statement'
+            comments = x[:participant]
+            next
+          else
+            f.write("\"#{x[:participant]}\",\"#{x[:text]}\",#{type},#{comments}\n")
+          end
+          type = 'Speech'
+          comments = ''
         }
       }
     end
