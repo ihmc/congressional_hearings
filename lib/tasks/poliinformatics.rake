@@ -21,7 +21,7 @@ namespace :poliinformatics do
             comments = x[:participant]
             next
           else
-            f.write("\"#{x[:participant]}\",\"#{x[:text]}\",#{type},#{comments}\n")
+            f.write("\"#{x[:participant]}\",\"#{x[:text]}\",#{type},#{comments} \n")
           end
           type = 'Speech'
           comments = ''
